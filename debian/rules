@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode
+export DH_VERBOSE=1
+
+# Set makefile for disable auto search build systems
+override_dh_auto_configure:
+	dh_auto_configure --buildsystem=makefile
+
+override_dh_builddeb:
+	dh_builddeb -- -Zgzip
+
+%:
+	dh $@
