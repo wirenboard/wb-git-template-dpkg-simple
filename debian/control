@@ -3,10 +3,13 @@ Maintainer: Alex Romanov <alex.romanov@wirenboard.com>
 Section: misc
 Priority: optional
 Standards-Version: 4.5.1
-Build-Depends: debhelper (>= 9)
+Build-Depends: debhelper-compat (= 13)
 Homepage: https://github.com/wirenboard/wb-git-template-dpkg-simple
 
 Package: wb-packetname
 Architecture: all
-Depends: ${misc:Depends}
-Description: test packet installed simple bash script
+Depends: ${misc:Depends},
+         wb-rules (>= 2.20.0~~)
+Description: Example virtual devices for Wiren Board controllers
+ Sample wb-rules JavaScript scripts (virtual pump, wall switch and
+ water meter) packaged from the simple deb-package template.
