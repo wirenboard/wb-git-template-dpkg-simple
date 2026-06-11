@@ -9,7 +9,7 @@
 ## Установка необходимых инструментов
 
 Убедитесь, что у вас установлены следующие пакеты:
-- git - для клонирования репозитория c GitHub
+- git - для клонирования репозитория с GitHub
 - dpkg-buildpackage в пакете dpkg-dev - нужен для сборки в deb-пакет
 - debhelper версии 11 или новее - его использует dpkg-buildpackage,\
   требуемая версия указана в `Build-Depends` файла `debian/control`
@@ -31,7 +31,7 @@ $ git clone https://github.com/wirenboard/wb-git-template-dpkg-simple.git && \
 В процессе разработки удобно клонировать сразу свою рабочую ветку:
 
 ```terminal
-$ GIT_BRANCH_NAME="feature/add-template-files-first-iteration"
+$ GIT_BRANCH_NAME="feature/my-feature-branch"
 $ git clone -b "${GIT_BRANCH_NAME}" --single-branch "https://github.com/wirenboard/wb-git-template-dpkg-simple.git" && \
   cd wb-git-template-dpkg-simple
 ```

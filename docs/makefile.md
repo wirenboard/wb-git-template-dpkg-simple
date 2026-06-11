@@ -20,7 +20,7 @@
 3. Создайте в корне проекта файл `Makefile` со следующим содержимым:
 
    ```makefile
-   # @file This Makefile installs virtual devices for WirenBoard
+   # @file This Makefile installs virtual devices for Wiren Board
    #       controllers into the system, convenient for testing
 
    # DESTDIR is specified externally if needed, default is empty
@@ -63,7 +63,7 @@
    чтобы `debhelper` не пытался определить ее автоматически:
 
    ```makefile
-   # Set makefile for disable auto search build systems
+   # Force the makefile build system instead of auto-detection
    override_dh_auto_configure:
    	dh_auto_configure --buildsystem=makefile
    ```
