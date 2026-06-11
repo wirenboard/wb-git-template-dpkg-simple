@@ -118,7 +118,7 @@ $ git clone -b "${GIT_BRANCH_NAME}" --single-branch "https://github.com/wirenboa
 
 2. **Измените название пакета**:
 
-   - В `debian/control` замените `wb-packetname` на желаемое имя\
+   - В `debian/control` замените `wb-packagename` на желаемое имя\
      пакета в полях `Source` и `Package`
 
 3. **Обновите информацию в changelog**:
@@ -157,7 +157,7 @@ $ git clone -b "${GIT_BRANCH_NAME}" --single-branch "https://github.com/wirenboa
 и `debian/changelog`:
 
 ```terminal
-$ sudo apt install -y ../wb-packetname_0.0.1_all.deb
+$ sudo apt install -y ../wb-packagename_0.0.1_all.deb
 ```
 
 ### Удаление
@@ -165,7 +165,7 @@ $ sudo apt install -y ../wb-packetname_0.0.1_all.deb
 Удалить пакет можно по его имени:
 
 ```terminal
-$ sudo apt remove wb-packetname
+$ sudo apt remove wb-packagename
 ```
 
 ## Способ установки файлов
