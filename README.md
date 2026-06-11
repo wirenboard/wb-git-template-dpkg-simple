@@ -186,13 +186,22 @@ $ sudo apt remove wb-packagename
 директории, в которые они будут установлены:
 
 ```script
-src/*.js etc/wb-rules/
+src/*.js usr/share/wb-rules-system/rules/
 ```
 
-Директория `/etc/wb-rules` — это путь для пользовательских скриптов,\
-они отображаются на странице "rules" веб-интерфейса. Также можно\
-использовать путь для системных скриптов, которые скрыты на странице\
-"rules": `/usr/share/wb-rules-system/rules`.
+Директория `/usr/share/wb-rules-system/rules` — это путь для системных\
+скриптов: они не отображаются на странице "rules" веб-интерфейса,\
+и пользователь не сможет случайно изменить их. Для файлов,\
+устанавливаемых пакетом, это правильный выбор по умолчанию.
+
+Альтернатива - директория пользовательских скриптов `/etc/wb-rules`,\
+ее содержимое отображается на странице "rules" веб-интерфейса.\
+Но файлы в `/etc` - конфигурационные: пользователь может отредактировать\
+их из веб-интерфейса, и тогда при обновлении пакета возникнет конфликт -\
+apt спросит, какую версию файла оставить, и пользователь, не глядя\
+согласившись, затрет свои изменения. Поэтому в `/etc/wb-rules` имеет\
+смысл устанавливать только заготовки, которые пользователь и должен\
+редактировать под себя.
 
 Обратите внимание, что копирование происходит только во время сборки\
 пакета. Если нужно сделать что-то перед/после установки на машине\
@@ -204,24 +213,32 @@ src/*.js etc/wb-rules/
 
 1. Удалите файл `debian/install`, иначе файлы будут установлены дважды.
 
-2. Создайте в корне проекта файл `Makefile` со следующим содержимым:
+2. **Определитесь с путем установки файлов на контроллере** - именно он\
+   будет записан в переменную `RULES_DEST` на следующем шаге. Важно\
+   хорошо понимать, куда и почему должны попасть ваши файлы - о разнице\
+   между `/usr/share/wb-rules-system/rules` и `/etc/wb-rules` см. раздел\
+   [Файл debian/install](#файл-debianinstall). Если сомневаетесь -\
+   проконсультируйтесь с коллегами.
+
+3. Создайте в корне проекта файл `Makefile` со следующим содержимым:
 
    ```makefile
    # @file This Makefile installs virtual devices for WirenBoard
    #       controllers into the system, convenient for testing
 
    # DESTDIR is specified externally if needed, default is empty
-   DESTDIR ?= /
-   PREFIX ?= /etc
+   DESTDIR ?=
+   PREFIX ?= /usr
 
    # Source JS files for installation
    JS_FILES := $(wildcard src/*.js)
 
-   # Use the system path to user scripts - shown on "rule" WEBUI page:
-   #   - /etc/wb-rules/*
-   # You can also use the path for system scripts - hided on "rule" WEBUI page:
+   # Use the path for system scripts - hidden on "rules" WEBUI page:
    #   - /usr/share/wb-rules-system/rules
-   RULES_DEST := $(DESTDIR)$(PREFIX)/wb-rules
+   # You can also use the path for user scripts - shown on "rules" WEBUI
+   # page, but suitable only for editable examples:
+   #   - /etc/wb-rules
+   RULES_DEST := $(DESTDIR)$(PREFIX)/share/wb-rules-system/rules
 
    .PHONY: all install
 
@@ -237,7 +254,7 @@ src/*.js etc/wb-rules/
    Во время сборки `debhelper` сам вызовет цель `install`, передав в\
    `DESTDIR` временную директорию упаковки пакета.
 
-3. Добавьте в файл `.gitattributes` строку для `Makefile`, чтобы он\
+4. Добавьте в файл `.gitattributes` строку для `Makefile`, чтобы он\
    гарантированно попал в репозиторий с окончаниями строк LF - с CRLF\
    `make` на контроллере не сможет его обработать:
 
@@ -245,7 +262,7 @@ src/*.js etc/wb-rules/
    Makefile text eol=lf
    ```
 
-4. В файл `debian/rules` добавьте явное указание системы сборки,\
+5. В файл `debian/rules` добавьте явное указание системы сборки,\
    чтобы `debhelper` не пытался определить ее автоматически:
 
    ```makefile
@@ -254,7 +271,7 @@ src/*.js etc/wb-rules/
    	dh_auto_configure --buildsystem=makefile
    ```
 
-5. Установите `make`, если он еще не установлен - его запустит\
+6. Установите `make`, если он еще не установлен - его запустит\
    `debhelper` при сборке:
 
    ```terminal
