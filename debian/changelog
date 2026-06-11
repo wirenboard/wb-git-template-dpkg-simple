@@ -1,5 +1,13 @@
+wb-packagename (0.0.2) stable; urgency=medium
+
+  * Simplify template: use debian/install instead of Makefile
+  * Install scripts to /usr/share/wb-rules-system/rules
+  * Move guides to docs/, rework README
+
+ -- Alex Romanov <alex.romanov@wirenboard.com>  Thu, 11 Jun 2026 11:11:11 +0300
+
 wb-packagename (0.0.1) stable; urgency=medium
 
   * Initial release
 
- -- Alex Romanov <alex.romanov@wirenboard.com>  Thu, 11 Jun 2026 11:11:11 +0300
+ -- Alex Romanov <alex.romanov@wirenboard.com>  Tue, 11 Oct 2011 11:11:11 +0300

@@ -61,7 +61,7 @@ $ git clone -b "${GIT_BRANCH_NAME}" --single-branch "https://github.com/wirenboa
 и `debian/changelog`:
 
 ```terminal
-$ sudo apt install -y ../wb-packagename_0.0.1_all.deb
+$ sudo apt install -y ../wb-packagename_0.0.2_all.deb
 ```
 
 ## Проверка работы пакета
