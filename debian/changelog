@@ -1,3 +1,11 @@
+wb-packagename (0.0.3) stable; urgency=medium
+
+  * Fill debian/copyright in the DEP-5 format with the MIT-WB license text
+  * Update LICENSE: Automation Technologies, LLC (Wiren Board) as the copyright holder,
+    2024 as the first publication year
+
+ -- Ekaterina Volkova <ekaterina.volkova@wirenboard.com>  Thu, 12 Nov 2026 13:37:56 +0300
+
 wb-packagename (0.0.2) stable; urgency=medium
 
   * Simplify template: use debian/install instead of Makefile
